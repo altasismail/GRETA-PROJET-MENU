@@ -10,9 +10,9 @@
       th:action="@{/recipe/update/{id}(id=${category.id})}"
       th:object="${category}"
       method="post">
-    <label for="name">Name</label>
-    <input type="text" th:field="*{name}" id="name" placeholder="Name">
-    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+    <label for="label">Name</label>
+    <input type="text" th:field="*{label}" id="label" placeholder="Name">
+    <span th:if="${#fields.hasErrors('label')}" th:errors="*{label}"></span>
     <input type="submit" value="Update Category">
 </form>
 </body>

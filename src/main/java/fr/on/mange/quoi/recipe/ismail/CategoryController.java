@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 
@@ -41,7 +40,7 @@ public class  CategoryController {
         return "category";
     }
     @GetMapping("/edit/{id}")
-    public String updateCategory(@PathVariable("id") long id, Model model) {
+    public String updateCategory(@PathVariable("id") String id, Model model) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
 
@@ -49,8 +48,8 @@ public class  CategoryController {
         return "update-category";
     }
     @PostMapping("/update/{id}")
-    public String updateCategory(@PathVariable("id") long id, @Valid Category category,
-                             BindingResult result, Model model) {
+    public String updateCategory(@PathVariable("id") String id, @Valid Category category,
+                                 BindingResult result, Model model) {
         if (result.hasErrors()) {
             category.setId(id);
             return "category";
@@ -61,7 +60,7 @@ public class  CategoryController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable("id") long id, Model model) {
+    public String deleteCategory(@PathVariable("id") String id, Model model) {
         Category category = categoryRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Invalid category Id:" + id));
         categoryRepository.delete(category);
